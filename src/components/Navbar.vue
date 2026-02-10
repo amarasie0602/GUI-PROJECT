@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import logo from '@/assets/pawtopia-logo.png'
+import logo from '@/assets/pawmie-logo.png'
 
 const isDarkMode = ref(false)
 
@@ -16,41 +16,43 @@ const toggleDarkMode = () => {
 </script>
 
 <template>
-  <nav class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+  <nav class="bg-white/90 dark:bg-[#0b1220]/90 backdrop-blur border-b border-gray-200 dark:border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <a href="/" class="flex items-center gap-2 text-2xl font-bold text-gray-900 hover:text-indigo-600 transition-colors">
-          <img :src="logo" alt="Pawtopia logo" class="h-25 w-30"/>
+      <div class="flex items-center justify-between  h-16">
+
+        <a href="/" class="flex items-center gap-2">
+          <img :src="logo" alt="Pawmie-logo" class="h-30 w-auto block relative top-2"/>
           
         </a>
         <ul class="flex items-center gap-8">
           <li>
-            <a href="/" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors">Home</a>
+            <a href="/" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">Home</a>
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors">Services</a>
+            <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">Services</a>
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors">About</a>
+            <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">About</a>
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors">Contact</a>
+            <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">Contact</a>
           </li>
         </ul>
-        <button
-        @click="toggleDarkMode"
-        class="ml-4 p-2 rounded-full
-              bg-gray-100 dark:bg-gray-800
-              text-gray-700 dark:text-gray-200
-              hover:bg-gray-200 dark:hover:bg-gray-700
-              transition"
-        aria-label="Toggle dark mode">
-        <span v-if="isDarkMode">☀️</span>
-        <span v-else>🌙</span>
-      </button>
+    <button
+      @click="toggleDarkMode"
+      class="ml-4 flex items-center justify-center w-10 h-10 rounded-full
+            bg-[#fde68a] dark:bg-[#1e293b]
+            hover:scale-110 transition"
+      aria-label="Toggle Dark Mode"
+    >
+      <span v-if="isDarkMode" class="text-[#60a5fa]">🌙</span>
+      <span v-else class="text-[#f97316]">☀️</span>
+    </button>
+
+
 
       </div>
-    </div>
+    </div> 
   </nav>
 </template>
 
