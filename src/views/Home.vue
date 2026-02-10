@@ -23,7 +23,7 @@ import Navbar from '@/components/Navbar.vue'
 
 
       <!--Cards section-->
-      <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 ">
         <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-center">
           <h3 class="text-xl font-semibold mb-2">Care Tips</h3>
             <p class="text-gray-600 dark:text-gray-300">
