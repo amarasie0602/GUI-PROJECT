@@ -2,17 +2,16 @@
 import { ref, onMounted } from 'vue'
 import logo from '@/assets/pawmie-logo.png'
 
-const isDarkMode = ref(false)
+  const isDarkMode = ref(false)
 
-onMounted(() => {
-  isDarkMode.value = document.documentElement.classList.contains('dark')
-})
+  onMounted(() => {
+   isDarkMode.value = document.documentElement.classList.contains('dark')})
 
-const toggleDarkMode = () => {
-  isDarkMode.value = !isDarkMode.value
-   document.documentElement.classList.toggle('dark', isDarkMode.value)
-  localStorage.setItem('theme', isDarkMode.value ? 'dark' : 'light')
-  }
+  const toggleDarkMode = () => {
+    isDarkMode.value = !isDarkMode.value
+    document.documentElement.classList.toggle('dark', isDarkMode.value)
+    localStorage.setItem('theme', isDarkMode.value ? 'dark' : 'light')
+   }
 </script>
 
 <template>
@@ -24,20 +23,48 @@ const toggleDarkMode = () => {
           <img :src="logo" alt="Pawmie-logo" class="h-30 w-auto block relative top-2"/>
           
         </a>
-        <ul class="flex items-center gap-8">
-          <li>
-            <a href="/" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">Home</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">Services</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">About</a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">Contact</a>
-          </li>
-        </ul>
+          <ul class="flex items-center gap-8">
+            <li>
+              <router-link
+                to="/"
+                class="text-gray-500 hover:text-indigo-500 font-medium transition-colors"
+              >
+                Home
+              </router-link>
+            </li>
+
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">
+                Services
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">
+                About
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-500 font-medium transition-colors">
+                Contact
+              </a>
+            </li>
+
+            <!-- SIGN IN BUTTON -->
+            <li>
+              <router-link
+                to="/login"
+                class="px-4 py-2 rounded-full
+                      bg-gradient-to-r from-blue-500 to-purple-500
+                      text-white font-semibold
+                      hover:opacity-90 transition"
+              >
+                Sign In
+              </router-link>
+            </li>
+          </ul>
+
     <button
       @click="toggleDarkMode"
       class="ml-4 flex items-center justify-center w-10 h-10 rounded-full
