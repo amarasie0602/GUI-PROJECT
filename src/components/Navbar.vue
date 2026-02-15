@@ -2,7 +2,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import logo from '@/assets/pawmie-logo.png'
 import { useRouter } from 'vue-router'
-import {watchEffect} from 'vue'
 
 const router = useRouter()
 const isAuthenticated = ref(false)
@@ -10,12 +9,14 @@ const showDropdown = ref(false)
 const isDarkMode = ref(false)
 const isScrolled = ref(false)
 
+const updateAuthState = () => {
+  isAuthenticated.value = localStorage.getItem('isAuthenticated') === 'true'
+}
+
 // Handle scroll event to change navbar appearance
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
 }
-
-
 
 // Handle user logout
 const handleLogout = () => {
@@ -24,27 +25,33 @@ const handleLogout = () => {
   showDropdown.value = false
   router.push('/login') // Redirect to login page
 }
-//Dropdown close on outside click
+
+// Dropdown close on outside click
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
   if(!target.closest('.relative')) {
     showDropdown.value = false
   }
 }
-  // Initialize settings on component mount
+
+let removeAfterEach: (() => void) | undefined
+
 onMounted(() => {
   isDarkMode.value = document.documentElement.classList.contains('dark')
-  window.addEventListener('scroll', handleScroll) // Add scroll listener
-  isAuthenticated.value = localStorage.getItem('isAuthenticated') === 'true' // Check auth status
+  window.addEventListener('scroll', handleScroll)
+  updateAuthState()
   window.addEventListener('click', handleClickOutside)
+  // Re-check auth when navigating (e.g. after login redirect)
+  removeAfterEach = router.afterEach(updateAuthState)
+  // Re-check when storage changes (e.g. from another tab)
+  window.addEventListener('storage', updateAuthState)
 })
-// Cleanup on component unmount
+
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll) // Remove scroll listener
+  window.removeEventListener('scroll', handleScroll)
   window.removeEventListener('click', handleClickOutside)
-})
-watchEffect(() => {
-  isAuthenticated.value = localStorage.getItem('isAuthenticated') === 'true' // Reactively update auth status
+  removeAfterEach?.()
+  window.removeEventListener('storage', updateAuthState)
 })
 // Toggle dark mode
 const toggleDarkMode = () => {
@@ -63,50 +70,51 @@ const toggleDarkMode = () => {
       : 'bg-transparent border-transparent'
   ]"
 >
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex items-center justify-between h-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="relative flex items-center justify-between h-16">
 
       <!-- LEFT: Logo -->
-      <router-link to="/" class="flex items-center">
-        <img :src="logo" alt="Pawmie Logo" class="h-10 w-auto" />
+      <router-link to="/" class="relative z-10 flex items-center">
+        <img :src="logo" alt="Pawmie Logo" class="h-30 w-auto" />
       </router-link>
 
-      <!-- CENTER: Navigation Links -->
-      <div class="hidden md:flex items-center gap-8">
-        <router-link to="/" class="text-gray-600 hover:text-indigo-500 font-medium transition-colors">
+      <!-- CENTER: Navigation Links (absolutely centered to prevent overlap) -->
+      <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-6 lg:gap-8">
+        <router-link to="/" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
           Home
         </router-link>
 
-        <router-link to="/services" class="text-gray-600 hover:text-indigo-500 font-medium transition-colors">
+        <router-link to="/services" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
           Services
         </router-link>
 
-        <router-link to="/about" class="text-gray-600 hover:text-indigo-500 font-medium transition-colors">
+        <router-link to="/about" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
           About
         </router-link>
 
-        <router-link to="/contact" class="text-gray-600 hover:text-indigo-500 font-medium transition-colors">
+        <router-link to="/contact" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
           Contact
         </router-link>
       </div>
 
-      <!-- RIGHT: Auth + Dark Toggle -->
-      <div class="flex items-center gap-4">
+      <!-- RIGHT: Auth + Dark Toggle (only one of Sign In OR profile shows) -->
+      <div class="relative z-10 flex items-center gap-3 sm:gap-4 min-w-[7rem]">
 
         <!-- If NOT Logged In -->
         <router-link
           v-if="!isAuthenticated"
+          key="signin"
           to="/login"
-          class="px-5 py-2 rounded-full 
+          class="shrink-0 px-5 py-2 rounded-full 
                  bg-gradient-to-r from-blue-500 to-purple-500
-                 text-white font-semibold
+                 text-white font-semibold whitespace-nowrap
                  hover:opacity-90 transition"
         >
           Sign In
         </router-link>
 
         <!-- If Logged In -->
-        <div v-if="isAuthenticated" class="relative">
+        <div v-else key="profile" class="relative shrink-0">
           <button
             @click="showDropdown = !showDropdown"
             class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center"
