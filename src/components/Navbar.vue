@@ -1,11 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import logo from '@/assets/pawmie-logo.png'
 
   const isDarkMode = ref(false)
+  const isScrolled = ref(false)
+  const handleScroll = () => {
+    isScrolled.value = window.scrollY > 50
+   }
 
   onMounted(() => {
-   isDarkMode.value = document.documentElement.classList.contains('dark')})
+   isDarkMode.value = document.documentElement.classList.contains('dark')
+   window.addEventListener('scroll', handleScroll)})
+  
+   onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
+   })
 
   const toggleDarkMode = () => {
     isDarkMode.value = !isDarkMode.value
@@ -15,7 +24,13 @@ import logo from '@/assets/pawmie-logo.png'
 </script>
 
 <template>
-  <nav class="bg-white/90 dark:bg-[#0b1220]/90 backdrop-blur border-b border-gray-200 dark:border-white/10">
+  <nav
+  :class="[
+    'fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b',
+    isScrolled
+      ? 'bg-white/90 backdrop-blur-md shadow-lg dark:bg-gray-900/90 border-gray-200 dark:border-white/10'
+      : 'bg-transparent border-transparent']">
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between  h-16">
 
@@ -75,8 +90,6 @@ import logo from '@/assets/pawmie-logo.png'
       <span v-if="isDarkMode" class="text-[#60a5fa]">🌙</span>
       <span v-else class="text-[#f97316]">☀️</span>
     </button>
-
-
 
       </div>
     </div> 
