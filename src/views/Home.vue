@@ -11,10 +11,9 @@ import FeaturesSection from '@/components/FeatureSection.vue'
            from-blue-100 via-purple-100 to-pink-100
            dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
   >
-
-    <Navbar />
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-24">
+      <!--Navbar-->
+      <Navbar />
+      <main class="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
       <!-- Hero Section -->
       <Hero />

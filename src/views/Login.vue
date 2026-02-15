@@ -12,7 +12,7 @@ const handleLogin = () =>
     //fake login validation
     if(email.value && password.value)
     {
-        // In a real app, you'd verify credentials here
+        localStorage.setItem('isAuthenticated', 'true') // Set auth flag in localStorage
         router.push('/') // Redirect to home on successful login
     }
      else 
@@ -24,6 +24,7 @@ const handleLogin = () =>
 
 const handleGoogleLogin = () => {
    //temporary fake google login
+   localStorage.setItem('isAuthenticated', 'true') // Set auth flag in localStorage
    router.push('/') // Redirect to home on successful login
 }
 </script>
