@@ -63,8 +63,8 @@ const handleBooking = () => {
 </script>
 
 <template>
-  <section id="services" class="mt-40 py-10 bg-gradient-to-br from bg-pink-200 to-blue-200 dark:bg-gradient-to-br dark: from-[#0f172a] to-[#1e293b] rounded-3xl px-8">
-
+  <section id="services" class="mt-40 py-1 bg-gradient-to-br from-blue-200 to-pink-200 dark:bg-gradient-to-br dark: from-[#0f172a] to-[#1e293b] rounded-3xl px-8">
+0 
   <!-- Section Title -->
   <div class="text-center mb-16">
     <h2 class="text-4xl font-bold text-gray-800 dark:text-white">
