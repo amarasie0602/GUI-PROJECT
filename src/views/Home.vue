@@ -22,7 +22,8 @@ import FeaturesSection from '@/components/FeatureSection.vue'
       <div class="w-24 h-1 bg-indigo-500 mx-auto rounded-full mt-12 mb-16"></div>
 
       <!-- Features Section -->
-      <FeaturesSection />
+      <FeaturesSection  class="mt-32"/>
+
 
     </main>
 
