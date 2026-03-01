@@ -13,6 +13,7 @@ const handleLogin = () =>
     if(email.value && password.value)
     {
         localStorage.setItem('isAuthenticated', 'true') // Set auth flag in localStorage
+        localStorage.setItem('userEmail', email.value)
         router.push('/') // Redirect to home on successful login
     }
      else 
@@ -25,6 +26,7 @@ const handleLogin = () =>
 const handleGoogleLogin = () => {
    //temporary fake google login
    localStorage.setItem('isAuthenticated', 'true') // Set auth flag in localStorage
+   localStorage.setItem('userEmail', 'google-user@pawmie.com')
    router.push('/') // Redirect to home on successful login
 }
 </script>
