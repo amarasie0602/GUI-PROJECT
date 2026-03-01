@@ -84,9 +84,9 @@ const toggleDarkMode = () => {
           Home
         </router-link>
 
-        <router-link to="/services" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
+        <a href ="#services" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
           Services
-        </router-link>
+        </a>
 
         <router-link to="/about" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
           About
