@@ -84,9 +84,62 @@ const toggleDarkMode = () => {
           Home
         </router-link>
 
-        <a href ="#services" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
-          Services
-        </a>
+        <!-- Services dropdown (only when logged in) -->
+        <div v-if="isAuthenticated" class="relative group">
+          <button
+            type="button"
+            class="inline-flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap"
+          >
+            <span>Services</span>
+            <span class="text-[10px]">▾</span>
+          </button>
+
+          <div
+            class="opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
+                   absolute left-1/2 top-full mt-3 -translate-x-1/2 w-60 rounded-2xl bg-white dark:bg-gray-900
+                   shadow-xl border border-gray-200/80 dark:border-gray-700/80 overflow-hidden transition-all duration-200"
+          >
+            <router-link
+              to="/services/vet-appointment"
+              class="block px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-gray-800"
+            >
+              Vet Appointment
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                Routine health checks & vaccinations
+              </p>
+            </router-link>
+
+            <router-link
+              to="/services/emergency-care"
+              class="block px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-rose-50 dark:hover:bg-gray-800 border-t border-gray-100 dark:border-gray-800"
+            >
+              Emergency Care
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                Urgent support for critical situations
+              </p>
+            </router-link>
+
+            <router-link
+              to="/services/grooming-booking"
+              class="block px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-pink-50 dark:hover:bg-gray-800 border-t border-gray-100 dark:border-gray-800"
+            >
+              Grooming Booking
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                Baths, haircuts, nails & more
+              </p>
+            </router-link>
+
+            <router-link
+              to="/services/training-services"
+              class="block px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-emerald-50 dark:hover:bg-gray-800 border-t border-gray-100 dark:border-gray-800"
+            >
+              Training Services
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                Obedience & behaviour training
+              </p>
+            </router-link>
+          </div>
+        </div>
 
         <router-link to="/about" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
           About
@@ -94,6 +147,22 @@ const toggleDarkMode = () => {
 
         <router-link to="/contact" class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap">
           Contact
+        </router-link>
+
+        <router-link
+          v-if="isAuthenticated"
+          to="/marketplace"
+          class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap"
+        >
+          Marketplace
+        </router-link>
+
+        <router-link
+          v-if="isAuthenticated"
+          to="/my-bookings"
+          class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 font-medium transition-colors whitespace-nowrap"
+        >
+          My Bookings
         </router-link>
       </div>
 
