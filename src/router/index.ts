@@ -5,10 +5,15 @@ import Signup from '@/views/Signup.vue'
 import Booking from '@/views/Booking.vue'
 import MyBookings from '@/views/MyBookings.vue'
 import Marketplace from '@/views/Marketplace.vue'
+import Cart from '@/views/Cart.vue'
+import Orders from '@/views/Orders.vue'
 import VetAppointment from '@/views/services/VetAppointment.vue'
 import EmergencyCare from '@/views/services/EmergencyCare.vue'
 import GroomingBooking from '@/views/services/GroomingBooking.vue'
 import TrainingServices from '@/views/services/TrainingServices.vue'
+import About from '@/views/About.vue'
+import Contact from '@/views/Contact.vue'
+import AdminMarketplace from '@/views/AdminMarketplace.vue'
 
 const routes = [
   {
@@ -44,6 +49,34 @@ const routes = [
     name: 'Marketplace',
     component: Marketplace,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/marketplace/cart',
+    name: 'Cart',
+    component: Cart,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/marketplace/orders',
+    name: 'Orders',
+    component: Orders,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/admin/marketplace',
+    name: 'AdminMarketplace',
+    component: AdminMarketplace,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact,
   },
   {
     path: '/services/vet-appointment',
