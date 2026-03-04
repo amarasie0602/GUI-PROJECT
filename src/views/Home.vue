@@ -2,6 +2,7 @@
 import Navbar from '@/components/Navbar.vue'
 import Hero from '@/components/Hero.vue'
 import FeaturesSection from '@/components/FeatureSection.vue'
+import CustomerPetsSection from '@/components/CustomerPetsSection.vue';
 </script>
 
 <template>
@@ -24,6 +25,8 @@ import FeaturesSection from '@/components/FeatureSection.vue'
       <!-- Features Section -->
       <FeaturesSection  class="mt-32"/>
 
+      <!-- Customer Pets Section -->
+      <CustomerPetsSection />
 
     </main>
 

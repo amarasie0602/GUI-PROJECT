@@ -74,3 +74,4 @@ const categories = computed(() => Object.entries(myGroupedByCategory.value))
   </div>
 </template>
 
+<style scoped>  </style>
