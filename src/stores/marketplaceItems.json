@@ -1,0 +1,46 @@
+[
+  {
+    "id": "mp-1",
+    "name": "Premium Chicken Kibble",
+    "category": "Food",
+    "price": "₹899",
+    "badge": "Best for everyday meals",
+    "description": "High‑protein dry food with essential vitamins for active dogs.",
+    "tag": "Top pick",
+    "color": "from-amber-400 to-orange-500",
+    "imageUrl": "https://images.pexels.com/photos/3299906/pexels-photo-3299906.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "id": "mp-2",
+    "name": "CloudSoft Pet Bed",
+    "category": "Comfort",
+    "price": "₹1,499",
+    "badge": "Orthopedic support",
+    "description": "Memory‑foam bed that keeps joints comfy for older pets.",
+    "tag": "Most loved",
+    "color": "from-sky-400 to-indigo-500",
+    "imageUrl": "https://images.pexels.com/photos/858221/pexels-photo-858221.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "id": "mp-3",
+    "name": "Interactive Treat Toy",
+    "category": "Toys",
+    "price": "₹599",
+    "badge": "Slow feeding",
+    "description": "Keeps your pet mentally engaged while rewarding them with treats.",
+    "tag": "New",
+    "color": "from-emerald-400 to-teal-500",
+    "imageUrl": "https://images.pexels.com/photos/4608238/pexels-photo-4608238.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "id": "mp-4",
+    "name": "No‑Pull Harness",
+    "category": "Accessories",
+    "price": "₹749",
+    "badge": "Gentle control",
+    "description": "Comfort‑fit harness to make walks safer and easier to handle.",
+    "tag": "Editor’s pick",
+    "color": "from-rose-400 to-fuchsia-500",
+    "imageUrl": "https://images.pexels.com/photos/573182/pexels-photo-573182.jpeg?auto=compress&cs=tinysrgb&w=800"
+  }
+]

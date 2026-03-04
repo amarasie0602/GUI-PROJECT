@@ -1,0 +1,35 @@
+[
+  {
+    "id": "pet-1",
+    "name": "Luna",
+    "species": "Dog",
+    "breed": "Labrador Retriever",
+    "age": 4,
+    "ownerName": "Ananya",
+    "city": "Bangalore",
+    "favoriteService": "Vet Appointment Booking",
+    "imageUrl": "https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "id": "pet-2",
+    "name": "Simba",
+    "species": "Cat",
+    "breed": "Ginger Tabby",
+    "age": 2,
+    "ownerName": "Rohan",
+    "city": "Mumbai",
+    "favoriteService": "Grooming Booking",
+    "imageUrl": "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "id": "pet-3",
+    "name": "Coco",
+    "species": "Dog",
+    "breed": "Pomeranian",
+    "age": 1,
+    "ownerName": "Sara",
+    "city": "Delhi",
+    "favoriteService": "Training Services",
+    "imageUrl": "https://images.pexels.com/photos/573180/pexels-photo-573180.jpeg?auto=compress&cs=tinysrgb&w=800"
+  }
+]

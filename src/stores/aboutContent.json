@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": "We built Pawmie so pets get the same care as family.",
+    "subtitle": "Pawmie is a friendly pet‑care companion that helps busy pet parents book vet visits, grooming, and training in just a few taps.",
+    "badge": "About Pawmie"
+  },
+  "stats": [
+    {
+      "label": "Happy pet families (demo)",
+      "value": "1,200+"
+    },
+    {
+      "label": "Bookings created in this demo",
+      "value": "3,500+"
+    },
+    {
+      "label": "Average rating from pet parents",
+      "value": "4.9/5"
+    }
+  ],
+  "values": [
+    {
+      "id": "value-1",
+      "title": "Pet‑first design",
+      "description": "Every screen, flow, and reminder is designed to reduce stress for pets and humans."
+    },
+    {
+      "id": "value-2",
+      "title": "Simple for busy humans",
+      "description": "From quick booking to clear reminders, we focus on what you actually need day‑to‑day."
+    },
+    {
+      "id": "value-3",
+      "title": "Built for growth",
+      "description": "This demo is ready to plug into real vet partners, groomers, and trainers as your project grows."
+    }
+  ],
+  "story": {
+    "heading": "The story behind Pawmie",
+    "paragraphs": [
+      "Pawmie started as a simple idea: pet care should feel as friendly and organised as caring for any other member of the family. Many pet parents juggle work, family, and health appointments — we wanted to make at least one part of that easier.",
+      "This demo project focuses on the core journey: discovering services, booking appointments, and keeping track of upcoming visits. The goal is to give you a clean, modern foundation that you can easily connect to real APIs, databases, or admin dashboards later.",
+      "Everything you see here — from bookings to marketplace items — is powered by structured dummy data. That makes it safe to experiment with UI, layouts, and new ideas without worrying about real user information."
+    ]
+  },
+  "team": [
+    {
+      "id": "team-1",
+      "name": "Paws & Pixels Studio",
+      "role": "Design & Product (Demo)",
+      "bio": "Imaginary product team focused on making pet care tools delightful and easy to use."
+    },
+    {
+      "id": "team-2",
+      "name": "Happy Tails Lab",
+      "role": "Research (Demo)",
+      "bio": "Helps validate flows and features with real pet parents before they reach production."
+    }
+  ]
+}

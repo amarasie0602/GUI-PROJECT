@@ -1,4 +1,5 @@
 import { ref, computed } from 'vue'
+import dummyBookings from './dummyBookings.json'
 
 export interface Booking {
   id: string
@@ -24,31 +25,7 @@ function loadInitialBookings(): Booking[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) {
-      // Some dummy seed data for initial view
-      return [
-        {
-          id: 'demo-1',
-          petName: 'Buddy',
-          ownerName: 'Alice',
-          userEmail: 'demo@pawmie.com',
-          service: 'Vet Appointment Booking',
-          category: 'Medical Care',
-          date: '2026-03-05',
-          time: '10:30',
-          notes: 'Annual health check-up',
-        },
-        {
-          id: 'demo-2',
-          petName: 'Milo',
-          ownerName: 'Rahul',
-          userEmail: 'demo@pawmie.com',
-          service: 'Grooming Booking',
-          category: 'Grooming & Training',
-          date: '2026-03-08',
-          time: '15:00',
-          notes: 'Full grooming session',
-        },
-      ]
+      return dummyBookings as Booking[]
     }
     const parsed = JSON.parse(raw) as Booking[]
     return Array.isArray(parsed) ? parsed : []

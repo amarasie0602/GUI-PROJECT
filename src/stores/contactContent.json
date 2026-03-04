@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "title": "We’re here for every little paw problem.",
+    "subtitle": "Reach out to the Pawmie team with questions about bookings, services, or ideas for new features.",
+    "badge": "Contact Pawmie"
+  },
+  "channels": [
+    {
+      "id": "channel-1",
+      "label": "Email support",
+      "value": "support@pawmie-demo.com",
+      "description": "Best for questions about how the demo works or for feedback.",
+      "icon": "mail"
+    },
+    {
+      "id": "channel-2",
+      "label": "Demo helpline",
+      "value": "+91-98765-00000",
+      "description": "Use this in mockups to show a support phone number (no real calls).",
+      "icon": "phone"
+    },
+    {
+      "id": "channel-3",
+      "label": "Studio address",
+      "value": "Pawmie Studio, Paw Street, Demo City",
+      "description": "A fictional address used only for UI and layout purposes.",
+      "icon": "map"
+    }
+  ],
+  "officeHours": {
+    "title": "Demo office hours",
+    "lines": [
+      "Monday – Friday: 9:00 AM – 7:00 PM",
+      "Saturday: 10:00 AM – 4:00 PM",
+      "Sunday & public holidays: Response times may be slower."
+    ]
+  },
+  "faq": [
+    {
+      "id": "faq-1",
+      "question": "Is this a real service?",
+      "answer": "This is a demo project for learning and UI exploration. You can connect it to real backends later."
+    },
+    {
+      "id": "faq-2",
+      "question": "Where do my bookings go?",
+      "answer": "All bookings in this demo are stored locally in your browser using localStorage, not on a remote server."
+    },
+    {
+      "id": "faq-3",
+      "question": "Can I customise Pawmie for my clinic?",
+      "answer": "Yes. You can replace this dummy JSON with your own content, services, and branding as you build a real product."
+    }
+  ]
+}
+
