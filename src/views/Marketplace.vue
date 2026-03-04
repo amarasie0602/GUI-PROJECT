@@ -134,10 +134,10 @@ const addToCart = (product: MarketplaceItem) => {
             Pet essentials
           </p>
           <h1 class="mt-3 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Shop for everything your pet <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-pink-500">loves</span>.
+            Shop for everything your pet <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-pink-500">loves</span>
           </h1>
           <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl">
-            Discover curated food, toys, accessories, and comfort items — all picked with happy
+            Discover curated food, toys, accessories, and comfort items - all picked with happy
             paws in mind. This is a demo marketplace; items are for display only.
           </p>
           <!-- Search -->

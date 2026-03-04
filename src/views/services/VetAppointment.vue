@@ -14,7 +14,7 @@ import BookingForm from '@/components/bookings/BookingForm.vue'
         </span>
 
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">
-          Schedule a <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-sky-500">vet visit</span> for your best friend.
+          Schedule a <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-sky-500">vet visit</span> for your best friend
         </h1>
 
         <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">
