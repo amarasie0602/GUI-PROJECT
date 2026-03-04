@@ -12,11 +12,11 @@
   },
   {
     "id": "pet-2",
-    "name": "Simba",
+    "name": "Zimba",
     "species": "Cat",
     "breed": "Ginger Tabby",
     "age": 2,
-    "ownerName": "Rohan",
+    "ownerName": "Sahan",
     "city": "Mumbai",
     "favoriteService": "Grooming Booking",
     "imageUrl": "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=800"

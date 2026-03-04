@@ -6,18 +6,13 @@ import CustomerPetsSection from '@/components/CustomerPetsSection.vue';
 </script>
 
 <template>
-  <div
-    class="min-h-screen 
-           bg-gradient-to-br 
-           from-blue-100 via-purple-100 to-pink-100
-           dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
-  >
-      <!--Navbar-->
-      <Navbar />
-      <main class="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <div class="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100
+              dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
 
-      <!-- Hero Section -->
-      <Hero />
+    <Navbar />
+
+    <!-- Hero should NOT be inside padded main -->
+    <Hero />
 
       <!-- Divider -->
       <div class="w-24 h-1 bg-indigo-500 mx-auto rounded-full mt-12 mb-16"></div>
@@ -27,8 +22,6 @@ import CustomerPetsSection from '@/components/CustomerPetsSection.vue';
 
       <!-- Customer Pets Section -->
       <CustomerPetsSection />
-
-    </main>
 
   </div>
 </template>
