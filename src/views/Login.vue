@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAuth } from '@/composables/useAuth'
-import AuthPanel from '@/components/auth/AuthPanel.vue'
-import AuthField from '@/components/auth/AuthField.vue'
-import AuthDivider from '@/components/auth/AuthDivider.vue'
-import AuthGoogleBtn from '@/components/auth/AuthGoogleBtn.vue'
+import AuthPanel from '@/components/AuthComponents/AuthPanel.vue'
+import AuthField from '@/components/AuthComponents/AuthField.vue'
+import AuthDivider from '@/components/AuthComponents/AuthDivider.vue'
+import AuthGoogleBtn from '@/components/AuthComponents/AuthGoogleBtn.vue'
 
 const { login, loading, errorMessage } = useAuth()
 
