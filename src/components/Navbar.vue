@@ -261,16 +261,16 @@ onUnmounted(() => {
           </p>
 
           <router-link to="/services/vet-appointment" class="py-3 px-1 text-gray-700 dark:text-white border-b border-gray-100 dark:border-gray-800 hover:text-indigo-500 transition-colors">
-            🐾 Vet Appointment
+            Vet Appointment
           </router-link>
           <router-link to="/services/emergency-care" class="py-3 px-1 text-gray-700 dark:text-white border-b border-gray-100 dark:border-gray-800 hover:text-rose-500 transition-colors">
-            🚨 Emergency Care
+            Emergency Care
           </router-link>
           <router-link to="/services/grooming-booking" class="py-3 px-1 text-gray-700 dark:text-white border-b border-gray-100 dark:border-gray-800 hover:text-pink-500 transition-colors">
-            ✂️ Grooming Booking
+            Grooming Booking
           </router-link>
           <router-link to="/services/training-services" class="py-3 px-1 text-gray-700 dark:text-white border-b border-gray-100 dark:border-gray-800 hover:text-emerald-500 transition-colors">
-            🎓 Training Services
+            Training Services
           </router-link>
 
           <router-link to="/marketplace" class="py-3 px-1 text-gray-700 dark:text-white font-medium border-b border-gray-100 dark:border-gray-800 hover:text-indigo-500 transition-colors">
