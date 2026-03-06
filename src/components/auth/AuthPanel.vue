@@ -1,33 +1,59 @@
 <script setup lang="ts">
 defineProps<{
-  title: string
   subtitle: string
 }>()
+
+const animals = [
+  {
+    src: 'https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif',
+    alt: 'cute dog',
+    class: 'pet-1',
+  },
+  {
+    src: 'https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif',
+    alt: 'cute cat',
+    class: 'pet-2',
+  },
+  {
+    src: 'https://media.giphy.com/media/jpbnoe3UIa8TU8LM13/giphy.gif',
+    alt: 'cute rabbit',
+    class: 'pet-3',
+  },
+  {
+    src: 'https://media.giphy.com/media/H4uE6w9G1uK4M/giphy.gif',
+    alt: 'cute hamster',
+    class: 'pet-4',
+  },
+]
 </script>
 
 <template>
   <div class="auth-panel">
+
+    <img
+      v-for="animal in animals"
+      :key="animal.alt"
+      :src="animal.src"
+      :alt="animal.alt"
+      :class="['pet', animal.class]"
+    />
+
+    <!-- Centered brand block -->
     <div class="panel-inner">
-
-      <div class="floating-pets">
-        <span class="pet pet-1">🐶</span>
-        <span class="pet pet-2">🐱</span>
-        <span class="pet pet-3">🐰</span>
-        <span class="pet pet-4">🦜</span>
-        <span class="pet pet-5">🐾</span>
-      </div>
-
-      <div class="panel-brand">
-        <span class="panel-logo">🐾</span>
-        <h1 class="panel-title">Pawmie</h1>
-        <p class="panel-sub" v-html="subtitle" />
-      </div>
-
-      <div class="panel-dots">
-        <span v-for="n in 6" :key="n" class="dot" :style="{ '--i': n }" />
-      </div>
-
+      <img
+        src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f43e.svg"
+        alt="paw"
+        class="panel-logo"
+      />
+      <h1 class="panel-title">Pawmie</h1>
+      <p class="panel-sub" v-html="subtitle" />
     </div>
+
+    <!-- Bottom dots -->
+    <div class="panel-dots">
+      <span v-for="n in 6" :key="n" class="dot" :style="{ '--i': n }" />
+    </div>
+
   </div>
 </template>
 
@@ -42,9 +68,31 @@ defineProps<{
 }
 
 @media (min-width: 768px) {
-  .auth-panel { display: flex; align-items: center; justify-content: center; }
+  .auth-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
+/* Corner animals */
+.pet {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.3);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  pointer-events: none;
+  animation: floatPet 4s ease-in-out infinite;
+}
+.pet-1 { top: 6%;    left: 6%;   animation-delay: 0s;   }
+.pet-2 { top: 6%;    right: 6%;  animation-delay: 1s;   }
+.pet-3 { bottom: 9%; left: 6%;   animation-delay: 2s;   }
+.pet-4 { bottom: 9%; right: 6%;  animation-delay: 3s;   }
+
+/* Center content */
 .panel-inner {
   position: relative;
   z-index: 2;
@@ -53,13 +101,13 @@ defineProps<{
   animation: fadeUp 0.7s ease both;
 }
 
-.panel-brand { color: #fff; }
-
 .panel-logo {
-  font-size: 3rem;
+  width: 60px;
+  height: 60px;
   display: block;
-  margin-bottom: 0.5rem;
-  animation: bounce 2s ease-in-out infinite;
+  margin: 0 auto 0.75rem;
+  animation: bounce 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.2));
 }
 
 .panel-title {
@@ -68,36 +116,19 @@ defineProps<{
   font-weight: 600;
   font-style: italic;
   color: #fff;
-  margin: 0 0 0.75rem;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  margin: 0 0 0.85rem;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.2);
 }
 
 .panel-sub {
   font-size: 1rem;
   font-weight: 600;
   color: rgba(255,255,255,0.88);
-  line-height: 1.65;
+  line-height: 1.7;
+  margin: 0;
 }
 
-.floating-pets {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.pet {
-  position: absolute;
-  font-size: 1.8rem;
-  animation: floatPet 4s ease-in-out infinite;
-  animation-delay: calc(var(--p, 0) * 0.8s);
-  opacity: 0.7;
-}
-.pet-1 { top: 12%; left: 10%; --p: 0; }
-.pet-2 { top: 18%; right: 12%; --p: 1; }
-.pet-3 { bottom: 22%; left: 8%; --p: 2; }
-.pet-4 { bottom: 15%; right: 10%; --p: 3; }
-.pet-5 { top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1; font-size: 8rem; --p: 4; }
-
+/* Bottom dots */
 .panel-dots {
   position: absolute;
   bottom: 2rem;
@@ -107,28 +138,28 @@ defineProps<{
   gap: 0.4rem;
 }
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.45);
   animation: pulse 1.8s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 0.2s);
+  animation-delay: calc(var(--i) * 0.18s);
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes floatPet {
-  0%, 100% { transform: translateY(0) rotate(-5deg); }
-  50%       { transform: translateY(-14px) rotate(5deg); }
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-12px) scale(1.05); }
 }
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-8px); }
 }
 @keyframes pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50%       { opacity: 1; transform: scale(1.3); }
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.35); }
 }
 </style>

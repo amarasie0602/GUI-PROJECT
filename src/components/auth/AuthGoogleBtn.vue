@@ -1,32 +1,48 @@
+<script setup lang="ts">
+defineProps<{
+  label?: string
+}>()
+
+defineEmits<{
+  (e: 'click'): void
+}>()
+</script>
+
 <template>
-  <div class="divider">
-    <span>or</span>
-  </div>
+  <button type="button" class="btn-google" @click="$emit('click')">
+    <img
+      src="https://www.svgrepo.com/show/475656/google-color.svg"
+      alt="Google"
+      class="google-icon"
+    />
+    {{ label ?? 'Continue with Google' }}
+  </button>
 </template>
 
 <style scoped>
-.divider {
+.btn-google {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--bg2);
+  color: var(--ink);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  animation: fadeUp 0.5s ease 0.35s both;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.3s, color 0.3s;
+  animation: fadeUp 0.5s ease 0.4s both;
 }
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  height: 1.5px;
-  background: var(--border);
-  transition: background 0.3s;
+.btn-google:hover {
+  border-color: var(--accent);
+  box-shadow: 0 3px 14px var(--shadow);
 }
-.divider span {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: color 0.3s;
-}
+.google-icon { width: 18px; height: 18px; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
