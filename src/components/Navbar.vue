@@ -62,16 +62,16 @@ const toggleDarkMode = () => {
 </script>
 
 <template>
-<nav
-  :class="[
-    'fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b',
-    isScrolled
-      ? 'bg-white/90 backdrop-blur-md shadow-lg dark:bg-gray-900/90 border-gray-200 dark:border-white/10'
-      : 'bg-transparent border-transparent'
-  ]"
+  <nav
+      :class="['fixed top-0 left-0 w-full z-50 transition-all duration-300',
+      isScrolled
+        ? 'bg-white/90 backdrop-blur-md shadow-md border-gray-200 dark:bg-gray-900/90 dark:border-white/10'
+        : 'bg-transparent border-none shadow-none'
+      ]"
 >
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="relative flex items-center justify-between h-16">
+    <div class="relative flex items-center justify-between h-20">
 
       <!-- LEFT: Logo -->
       <router-link to="/" class="relative z-10 flex items-center">
