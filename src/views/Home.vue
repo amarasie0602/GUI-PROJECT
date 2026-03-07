@@ -2,7 +2,8 @@
 import Navbar from '@/components/Navbar.vue'
 import Hero from '@/components/Hero.vue'
 import FeaturesSection from '@/components/FeatureSection.vue'
-import CustomerPetsSection from '@/components/CustomerPetsSection.vue';
+import CustomerPetsSection from '@/components/CustomerPetsSection.vue'
+import ReviewsSection from '@/components/ReviewsSection.vue'
 </script>
 
 <template>
@@ -11,17 +12,19 @@ import CustomerPetsSection from '@/components/CustomerPetsSection.vue';
 
     <Navbar />
 
-    <!-- Hero should NOT be inside padded main -->
     <Hero />
 
-      <!-- Divider -->
-      <div class="w-24 h-1 bg-indigo-500 mx-auto rounded-full mt-12 mb-16"></div>
+    <!-- Divider -->
+    <div class="w-24 h-1 bg-indigo-500 mx-auto rounded-full mt-12 mb-16"></div>
 
-      <!-- Features Section -->
-      <FeaturesSection  class="mt-32"/>
+    <!-- Features Section -->
+    <FeaturesSection class="mt-32" />
 
-      <!-- Customer Pets Section -->
-      <CustomerPetsSection />
+    <!-- Customer Pets Section -->
+    <CustomerPetsSection />
+
+    <!-- Reviews Section -->
+    <ReviewsSection />
 
   </div>
 </template>

@@ -8,7 +8,7 @@
     "ownerName": "Ananya",
     "city": "Bangalore",
     "favoriteService": "Vet Appointment Booking",
-    "imageUrl": "https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&w=800"
+    "imageUrl": "https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=300&fit=crop"
   },
   {
     "id": "pet-2",
@@ -19,7 +19,7 @@
     "ownerName": "Sahan",
     "city": "Mumbai",
     "favoriteService": "Grooming Booking",
-    "imageUrl": "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=800"
+    "imageUrl": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop"
   },
   {
     "id": "pet-3",
@@ -30,6 +30,72 @@
     "ownerName": "Sara",
     "city": "Delhi",
     "favoriteService": "Training Services",
-    "imageUrl": "https://images.pexels.com/photos/573180/pexels-photo-573180.jpeg?auto=compress&cs=tinysrgb&w=800"
+    "imageUrl": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=300&fit=crop"
+  },
+  {
+    "id": "pet-4",
+    "name": "Milo",
+    "species": "Rabbit",
+    "breed": "Holland Lop",
+    "age": 1,
+    "ownerName": "Priya",
+    "city": "Chennai",
+    "favoriteService": "Vet Appointment Booking",
+    "imageUrl": "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&h=300&fit=crop"
+  },
+  {
+    "id": "pet-5",
+    "name": "Kiwi",
+    "species": "Bird",
+    "breed": "Budgerigar",
+    "age": 1,
+    "ownerName": "Rohan",
+    "city": "Hyderabad",
+    "favoriteService": "Vet Appointment Booking",
+    "imageUrl": "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=400&h=300&fit=crop"
+  },
+  {
+    "id": "pet-6",
+    "name": "Max",
+    "species": "Dog",
+    "breed": "German Shepherd",
+    "age": 3,
+    "ownerName": "Arjun",
+    "city": "Pune",
+    "favoriteService": "Training Services",
+    "imageUrl": "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=400&h=300&fit=crop"
+  },
+  {
+    "id": "pet-7",
+    "name": "Bella",
+    "species": "Cat",
+    "breed": "Persian",
+    "age": 3,
+    "ownerName": "Nisha",
+    "city": "Kolkata",
+    "favoriteService": "Grooming Booking",
+    "imageUrl": "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=300&fit=crop"
+  },
+  {
+    "id": "pet-10",
+    "name": "Bruno",
+    "species": "Dog",
+    "breed": "Beagle",
+    "age": 2,
+    "ownerName": "Kavya",
+    "city": "Surat",
+    "favoriteService": "Grooming Booking",
+    "imageUrl": "https://images.unsplash.com/photo-1505628346881-b72b27e84530?w=400&h=300&fit=crop"
+  },
+  {
+    "id": "pet-11",
+    "name": "Nala",
+    "species": "Cat",
+    "breed": "Siamese",
+    "age": 4,
+    "ownerName": "Deepa",
+    "city": "Kochi",
+    "favoriteService": "Vet Appointment Booking",
+    "imageUrl": "https://images.unsplash.com/photo-1561948955-570b270e7c36?w=400&h=300&fit=crop"
   }
 ]
