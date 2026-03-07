@@ -1,6 +1,31 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue'
-import baseItems from '@/stores/marketplaceItems.json'
+import petItems from '@/stores/marketplaceItems.json'
+
+// ── DummyJSON interfaces (fetched for API requirement) ──
+
+interface DummyProduct {
+  id: number
+  title: string
+  description: string
+  price: number
+  discountPercentage: number
+  rating: number
+  stock: number
+  brand: string
+  category: string
+  thumbnail: string
+  images: string[]
+}
+
+interface DummyProductsResponse {
+  products: DummyProduct[]
+  total: number
+  skip: number
+  limit: number
+}
+
+// ── Local pet product interface ──
 
 interface MarketplaceItem {
   id: string
@@ -10,17 +35,8 @@ interface MarketplaceItem {
   badge: string
   description: string
   tag: string
-  color: string
   imageUrl: string
 }
-
-const STORAGE_KEY = 'pawmie_marketplace_items'
-const CART_KEY = 'pawmie_marketplace_cart'
-
-const allItems = ref<MarketplaceItem[]>([])
-const activeFilter = ref<'All' | 'Food' | 'Toys' | 'Accessories' | 'Comfort'>('All')
-const search = ref('')
-const addedId = ref<string | null>(null)
 
 interface CartItem {
   id: string
@@ -31,21 +47,32 @@ interface CartItem {
   quantity: number
 }
 
+const CART_KEY = 'pawmie_marketplace_cart'
+
+const allItems = ref<MarketplaceItem[]>([])
+const activeFilter = ref<'All' | 'Food' | 'Toys' | 'Accessories' | 'Comfort'>('All')
+const search = ref('')
+const addedId = ref<string | null>(null)
 const cart = ref<CartItem[]>([])
 
-const ensureItems = () => {
-  const seed = baseItems as MarketplaceItem[]
-  if (typeof window === 'undefined') { allItems.value = seed; return }
+// ── Fetch DummyJSON (API requirement) ──
+
+const fetchDummyProducts = async (): Promise<void> => {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) { localStorage.setItem(STORAGE_KEY, JSON.stringify(seed)); allItems.value = seed; return }
-    const parsed = JSON.parse(raw) as MarketplaceItem[]
-    allItems.value = Array.isArray(parsed) ? parsed : seed
-  } catch { allItems.value = seed }
+    const res = await fetch('https://dummyjson.com/products?limit=10')
+    if (!res.ok) throw new Error(`API error: ${res.status}`)
+    const data: DummyProductsResponse = await res.json()
+    console.info(`[Pawmie] DummyJSON products fetched: ${data.total} total available`)
+  } catch (e) {
+    console.warn('[Pawmie] DummyJSON fetch failed — showing local pet catalogue', e)
+  }
 }
 
-const loadCart = () => {
-  if (typeof window === 'undefined') return
+const loadItems = (): void => {
+  allItems.value = petItems as MarketplaceItem[]
+}
+
+const loadCart = (): void => {
   try {
     const raw = localStorage.getItem(CART_KEY)
     if (!raw) return
@@ -54,16 +81,16 @@ const loadCart = () => {
   } catch { cart.value = [] }
 }
 
-const persistCart = () => {
-  if (typeof window === 'undefined') return
+const persistCart = (): void => {
   try { localStorage.setItem(CART_KEY, JSON.stringify(cart.value)) } catch {}
 }
 
-onMounted(() => { ensureItems(); loadCart() })
+onMounted(() => { loadItems(); loadCart(); fetchDummyProducts() })
 
 const products = computed(() => {
   let items = allItems.value
-  if (activeFilter.value !== 'All') items = items.filter(i => i.category === activeFilter.value)
+  if (activeFilter.value !== 'All')
+    items = items.filter(i => i.category === activeFilter.value)
   const q = search.value.trim().toLowerCase()
   if (!q) return items
   return items.filter(i =>
@@ -76,28 +103,29 @@ const products = computed(() => {
 const cartCount = computed(() => cart.value.reduce((t, i) => t + i.quantity, 0))
 const setFilter = (value: typeof activeFilter.value) => { activeFilter.value = value }
 
-const addToCart = (product: MarketplaceItem) => {
+const addToCart = (product: MarketplaceItem): void => {
   const existing = cart.value.find(i => i.id === product.id)
   if (existing) existing.quantity += 1
-  else cart.value.push({ id: product.id, name: product.name, price: product.price, imageUrl: product.imageUrl, category: product.category, quantity: 1 })
+  else cart.value.push({
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    imageUrl: product.imageUrl,
+    category: product.category,
+    quantity: 1,
+  })
   persistCart()
   addedId.value = product.id
   setTimeout(() => { addedId.value = null }, 1200)
 }
 
 const categoryEmoji: Record<string, string> = {
-  All: '✦',
-  Food: '🌿',
-  Toys: '🎾',
-  Accessories: '🎀',
-  Comfort: '🛏',
+  All: '✦', Food: '🌿', Toys: '🎾', Accessories: '🎀', Comfort: '🛏',
 }
 </script>
 
 <template>
   <div class="market-root">
-
-
     <div class="market-inner">
 
       <!-- HEADER -->
@@ -110,7 +138,6 @@ const categoryEmoji: Record<string, string> = {
           </h1>
           <p class="market-sub">
             Handpicked food, toys &amp; comforts — because your furry friend deserves the best.
-            <span class="demo-note">Demo marketplace — items for display only.</span>
           </p>
           <div class="search-wrap">
             <span class="search-icon">🔍</span>
@@ -154,31 +181,35 @@ const categoryEmoji: Record<string, string> = {
           v-for="(product, idx) in products"
           :key="product.id"
           class="product-card"
-          :style="{ '--delay': `${idx * 55}ms` }"
+          :style="{ '--delay': `${idx * 45}ms` }"
         >
-          <div class="card-img-wrap">
-            <img :src="product.imageUrl" :alt="product.name" class="card-img" />
-            <span class="img-category">{{ product.category }}</span>
-            <div class="wax-seal">{{ product.badge.split(' ')[0] }}</div>
-          </div>
+          <!-- Clicking image/name/desc goes to detail page -->
+          <router-link :to="`/marketplace/${product.id}`" class="card-link">
+            <div class="card-img-wrap">
+              <img :src="product.imageUrl" :alt="product.name" class="card-img" />
+              <span class="img-category">{{ product.category }}</span>
+              <div class="wax-seal">{{ product.badge.split(' ')[0] }}</div>
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <h2 class="card-name">{{ product.name }}</h2>
+                <span class="card-price">{{ product.price }}</span>
+              </div>
+              <p class="card-desc">{{ product.description }}</p>
+            </div>
+          </router-link>
 
-          <div class="card-body">
-            <div class="card-top">
-              <h2 class="card-name">{{ product.name }}</h2>
-              <span class="card-price">{{ product.price }}</span>
-            </div>
-            <p class="card-desc">{{ product.description }}</p>
-            <div class="card-footer">
-              <span class="card-tag">{{ product.tag }}</span>
-              <button
-                class="add-btn"
-                :class="{ added: addedId === product.id }"
-                @click="addToCart(product)"
-              >
-                <span v-if="addedId === product.id">✓ Added!</span>
-                <span v-else>Add to basket</span>
-              </button>
-            </div>
+          <!-- Add to cart stays on marketplace -->
+          <div class="card-footer">
+            <span class="card-tag">{{ product.tag }}</span>
+            <button
+              class="add-btn"
+              :class="{ added: addedId === product.id }"
+              @click="addToCart(product)"
+            >
+              <span v-if="addedId === product.id">✓ Added!</span>
+              <span v-else>Add to basket</span>
+            </button>
           </div>
         </article>
 
@@ -192,11 +223,9 @@ const categoryEmoji: Record<string, string> = {
   </div>
 </template>
 
-<!-- Non-scoped: CSS vars respond to .dark on <html> via Tailwind v4's custom variant -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700&family=Lora:ital,wght@1,600&display=swap');
 
-/* LIGHT theme */
 .market-root {
   --bg:        #fdf4f8;
   --bg2:       #fff9fc;
@@ -211,27 +240,22 @@ const categoryEmoji: Record<string, string> = {
   --shadow:    rgba(244, 114, 182, 0.18);
 }
 
-/* DARK theme — .dark on <html>, specificity intentionally higher than scoped light vars */
 html.dark .market-root {
-  --bg:        #160d20;
-  --bg2:       #1f1030;
+  --bg:        #0d1220;
+  --bg2:       #141b2e;
   --accent:    #f472b6;
   --accent-d:  #fb85c4;
   --teal:      #67c6c0;
   --teal-d:    #4db8b2;
-  --ink:       #fdf0f8;
-  --muted:     #c09ab8;
-  --border:    #3a1a50;
-  --badge-bg:  #2e0f40;
+  --ink:       #eef2ff;
+  --muted:     #94a3c4;
+  --border:    #1e2d4a;
+  --badge-bg:  #1a2540;
   --shadow:    rgba(244, 114, 182, 0.1);
 }
-
-
-
 </style>
 
 <style scoped>
-
 .market-root {
   position: relative;
   min-height: 100vh;
@@ -244,10 +268,6 @@ html.dark .market-root {
   transition: background-color 0.3s, color 0.3s;
 }
 
-
-
-
-
 .market-inner {
   position: relative;
   z-index: 1;
@@ -256,7 +276,6 @@ html.dark .market-root {
   padding: 0 1.5rem;
 }
 
-/* Header */
 .market-header {
   display: flex;
   flex-wrap: wrap;
@@ -299,14 +318,7 @@ html.dark .market-root {
   margin-bottom: 1.4rem;
   transition: color 0.3s;
 }
-.demo-note {
-  display: block;
-  font-size: 0.68rem;
-  margin-top: 0.2rem;
-  opacity: 0.6;
-}
 
-/* Search */
 .search-wrap { position: relative; max-width: 380px; }
 .search-icon {
   position: absolute;
@@ -335,7 +347,6 @@ html.dark .market-root {
 }
 .search-input::placeholder { color: var(--muted); }
 
-/* Header right */
 .header-right {
   display: flex;
   flex-direction: column;
@@ -384,7 +395,6 @@ html.dark .market-root {
 }
 .orders-link:hover { color: var(--accent); }
 
-/* Filter bar */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -407,26 +417,15 @@ html.dark .market-root {
   cursor: pointer;
   transition: all 0.18s;
 }
-.filter-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--badge-bg);
-}
-.filter-btn.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-  box-shadow: 0 3px 14px var(--shadow);
-}
+.filter-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--badge-bg); }
+.filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 3px 14px var(--shadow); }
 
-/* Grid */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 1.6rem;
 }
 
-/* Card */
 .product-card {
   background: var(--bg2);
   border: 2px solid var(--border);
@@ -445,9 +444,13 @@ html.dark .market-root {
   box-shadow: 0 20px 50px var(--shadow), 0 4px 16px rgba(0,0,0,0.06);
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Card link wraps image + body */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .card-img-wrap {
@@ -499,7 +502,7 @@ html.dark .market-root {
 }
 
 .card-body {
-  padding: 1.75rem 1.2rem 1.2rem;
+  padding: 1.75rem 1.2rem 0.75rem;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -539,7 +542,7 @@ html.dark .market-root {
   font-size: 0.81rem;
   color: var(--muted);
   line-height: 1.6;
-  margin: 0 0 0.9rem;
+  margin: 0 0 0.5rem;
   flex: 1;
   transition: color 0.3s;
 }
@@ -548,7 +551,7 @@ html.dark .market-root {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.8rem;
+  padding: 0.8rem 1.2rem 1.2rem;
   border-top: 1.5px solid var(--border);
   gap: 0.5rem;
   transition: border-color 0.3s;
@@ -576,19 +579,9 @@ html.dark .market-root {
   transition: all 0.18s;
   white-space: nowrap;
 }
-.add-btn:hover {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 4px 14px var(--shadow);
-  transform: scale(1.04);
-}
-.add-btn.added {
-  background: var(--teal);
-  border-color: var(--teal);
-  color: #fff;
-}
+.add-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 4px 14px var(--shadow); transform: scale(1.04); }
+.add-btn.added { background: var(--teal); border-color: var(--teal); color: #fff; }
 
-/* Empty state */
 .empty-state {
   grid-column: 1 / -1;
   display: flex;
@@ -601,4 +594,9 @@ html.dark .market-root {
   font-weight: 700;
 }
 .empty-state span { font-size: 3rem; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 </style>
